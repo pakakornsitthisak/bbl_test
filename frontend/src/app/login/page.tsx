@@ -21,10 +21,11 @@ export default function Login() {
   };
 
   return (
-    <div style={{ padding: 20 }}>
-      <h2>Login</h2>
+    <div className="m-2 bg-gray-200 rounded-md border-2 border-black w-100 p-4 items-center justify-center text-center">
+      <h2 className="font-bold text-2xl">Login</h2>
       <form onSubmit={handleLogin}>
         <input
+          className="mt-4 w-full bg-blue-100 border-blue-900 border-2 rounded-md p-2"
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
@@ -33,6 +34,7 @@ export default function Login() {
         <br />
         <br />
         <input
+          className="w-full bg-blue-100 border-blue-900 border-2 rounded-md p-2"
           placeholder="Password"
           type="password"
           value={password}
@@ -41,7 +43,12 @@ export default function Login() {
         />
         <br />
         <br />
-        <button type="submit">Login</button>
+        <button
+          className="p-2 w-full bg-blue-500 border-blue-900 border-2 text-white font-bold rounded-md"
+          type="submit"
+        >
+          Login
+        </button>
       </form>
       <p>{message}</p>
     </div>

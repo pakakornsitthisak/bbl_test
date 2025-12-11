@@ -4,6 +4,7 @@ import { getBookings } from "@/lib/api/api";
 
 interface Booking {
   timeslot: string;
+  user_id: string;
 }
 
 export default function ViewBookings() {
@@ -35,17 +36,31 @@ export default function ViewBookings() {
   };
 
   return (
-    <div style={{ padding: 20 }}>
-      <h2>All Bookings (Admin)</h2>
-      {message && <p>{message}</p>}
-      <ul>
-        {bookings.map((b, index) => (
-          <li key={index}>{b.timeslot}</li>
-        ))}
-      </ul>
-      <button style={{ marginTop: 20 }} onClick={logout}>
-        Logout
-      </button>
+    <div className="w-100 bg-gray-200 border-black p-4 m-2 rounded-md border-2 items-center justify-center text-center">
+      <div className="p-4 flex flex-col">
+        <div className="p-4">
+          <h2 className="font-bold text-2xl">All Bookings (Admin)</h2>
+        </div>
+        {message && <p>{message}</p>}
+        {bookings.length > 0 && (
+          <div className="pt-4 bg-yellow-100 border-yellow-900 border-2 rounded-md p-4 text-md">
+            <ul>
+              {bookings.map((b, index) => (
+                <li key={index}>
+                  {b.user_id} - {b.timeslot}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <button
+          className="p-2 mt-4 bg-blue-500 border-blue-900 border-2 text-white font-bold rounded-md"
+          onClick={logout}
+        >
+          Logout
+        </button>
+      </div>
     </div>
   );
 }

@@ -46,24 +46,30 @@ def login():
 def create_booking():
     data = request.json
     timeslot = data.get("timeslot")
+    
     if timeslot not in TIME_SLOTS:
         return jsonify({"error": "Invalid timeslot"}), 400
+
     for booking in bookings:
         if booking["timeslot"] == timeslot:
             return jsonify({"error": "Timeslot already booked"}), 400
-    bookings.append({"timeslot": timeslot})
-    return jsonify({"message": "Booking created", "booking": {"timeslot": timeslot}})
+
+    booking = {
+        "timeslot": timeslot,
+        "user_id": request.user["username"]
+    }
+    bookings.append(booking)
+
+    return jsonify({"message": "Booking created", "booking": booking})
+
 
 
 @app.route("/bookings", methods=["GET"])
 @authenticate
 @admin_required
 def get_bookings():
-    """
-    Returns all bookings.
-    Only accessible to admin users.
-    """
     return jsonify(bookings)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

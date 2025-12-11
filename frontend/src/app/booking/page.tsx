@@ -21,7 +21,7 @@ export default function Booking() {
 
   useEffect(() => {
     if (!localStorage.getItem("token")) {
-      router.push("/");
+      window.location.href = "/";
     }
   }, []);
 
@@ -34,14 +34,19 @@ export default function Booking() {
 
   const logout = () => {
     localStorage.removeItem("token");
-    router.push("/");
+    window.location.href = "/";
+  };
+
+  const handleViewBooking = () => {
+    window.location.href = "/view_bookings";
   };
 
   return (
-    <div style={{ padding: 20 }}>
-      <h2>Book a Timeslot</h2>
+    <div className="w-100 bg-gray-200 border-2 border-black p-4 m-2">
+      <h2 className="font-bold text-2xl">Book a Timeslot</h2>
       <form onSubmit={handleBooking}>
         <select
+          className="mt-2 bg-blue-200 border-blue-900 rounded-md border-2 p-4 w-full h-10"
           value={timeslot}
           onChange={(e) => setTimeslot(e.target.value)}
           required
@@ -53,10 +58,26 @@ export default function Booking() {
         </select>
         <br />
         <br />
-        <button type="submit">Book Now</button>
+        <button
+          className="mt-4 p-2 w-full bg-blue-600 border-2 border-blue-900 text-white font-bold rounded-md"
+          type="submit"
+        >
+          Book Now
+        </button>
       </form>
       <p>{message}</p>
-      <button onClick={logout}>Logout</button>
+      <button
+        className="mt-4 p-2 w-full bg-green-400 border-2 border-green-700 text-white font-bold rounded-md"
+        onClick={handleViewBooking}
+      >
+        View bookings
+      </button>
+      <button
+        className="mt-4 p-2 w-full bg-gray-400 border-2 border-gray-700 text-white font-bold rounded-md"
+        onClick={logout}
+      >
+        Logout
+      </button>
     </div>
   );
 }
