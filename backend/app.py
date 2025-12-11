@@ -3,7 +3,7 @@ from flask_cors import CORS
 from functools import wraps
 import uuid
 
-from backend.db import TIME_SLOTS, bookings, session_tokens, users
+from db import TIME_SLOTS, bookings, session_tokens, users
 
 app = Flask(__name__)
 CORS(app)
@@ -64,6 +64,6 @@ def get_bookings():
     Only accessible to admin users.
     """
     return jsonify(bookings)
-    
+
 if __name__ == "__main__":
     app.run(debug=True)
