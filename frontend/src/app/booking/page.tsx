@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { createBooking } from "@/lib/api/api";
 
 const TIMESLOTS = [
@@ -15,7 +14,6 @@ const TIMESLOTS = [
 ];
 
 export default function Booking() {
-  const router = useRouter();
   const [timeslot, setTimeslot] = useState("");
   const [message, setMessage] = useState("");
 
@@ -56,8 +54,6 @@ export default function Booking() {
             <option key={slot}>{slot}</option>
           ))}
         </select>
-        <br />
-        <br />
         <button
           className="mt-4 p-2 w-full bg-blue-600 border-2 border-blue-900 text-white font-bold rounded-md"
           type="submit"
